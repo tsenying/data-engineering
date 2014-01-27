@@ -13,8 +13,7 @@ describe "data_files/new" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form[action=?][method=?]", data_files_path, "post" do
-      assert_select "input#data_file_file_name[name=?]", "data_file[file_name]"
-      assert_select "input#data_file_total[name=?]", "data_file[total]"
+      assert_select "input#data_file_data[name=?]", "data_file[data]"
     end
   end
 end
