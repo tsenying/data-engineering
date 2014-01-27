@@ -1,5 +1,4 @@
 class DataFilesController < ApplicationController
-
   # GET /data_files/new
   # GET /data_files/new.json
   def new
@@ -13,15 +12,23 @@ class DataFilesController < ApplicationController
   # POST /data_files
   # POST /data_files.json
   def create
-    @data_file = DataFile.new(params[:data_file])
+    @data_file = DataFile.new()
+
+    unless params[:data_file]
+      @data_file.errors[:base] << "Pick a data file."
+    else
+      uploaded_io = params[:data_file][:data]
+
+      @data_file.process(uploaded_io.tempfile)
+
+    end
 
     respond_to do |format|
-      if @data_file.save
-        format.html { redirect_to @data_file, notice: 'Data file was successfully created.' }
+      unless @data_file.errors.count > 0
+        format.html { redirect_to data_files_total_path, notice: "Total=#{@data_file.total}" }
       else
         format.html { render action: "new" }
       end
     end
   end
-
 end

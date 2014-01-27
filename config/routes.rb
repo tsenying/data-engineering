@@ -1,6 +1,8 @@
 DataEngineering::Application.routes.draw do
   root :to => 'data_files#new'
 
+  get "data_files/total"
+
   resources :data_files, only: [:new, :create]
 
   # The priority is based upon order of creation:
