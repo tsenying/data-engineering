@@ -1,10 +1,31 @@
-class DataFile < ActiveRecord::Base
+class DataFile
+  include ActiveModel::Validations
+  include ActiveModel::Conversion
+  extend ActiveModel::Naming
 
-  def process(data_file)
-    data_file.readline # skip header line
+  attr_accessor :data_file, :total
+
+  validates_presence_of :data_file, :message => "must be chosen"
+
+  def initialize(attributes = {})
+    attributes.each do |name, value|
+      send("#{name}=", value)
+    end
+  end
+
+  def persisted?
+    false
+  end
+
+  def new_record?
+    true
+  end
+
+  def process(uploaded_file)
+    uploaded_file.readline # skip header line
 
     self.total = 0
-    data_file.each do |line|
+    uploaded_file.each do |line|
       fields = line.split(/\t/);
       self.total += fields[2].to_f * fields[3].to_i
 

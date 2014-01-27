@@ -13,7 +13,13 @@
 
   <div class="field">
     <%= f.label :data_file %>
-    <%= f.file_field :data %>
+    <%= f.file_field :data_file %>
+  </div>
+
+  <%# dummy field to prevent nil params[:data_file] %>
+  <div class="field hidden">
+    <%= f.label :total %>
+    <%= f.text_field :total %>
   </div>
 
   <div class="actions">

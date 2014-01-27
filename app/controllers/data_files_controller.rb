@@ -1,6 +1,5 @@
 class DataFilesController < ApplicationController
   # GET /data_files/new
-  # GET /data_files/new.json
   def new
     @data_file = DataFile.new
 
@@ -10,17 +9,12 @@ class DataFilesController < ApplicationController
   end
 
   # POST /data_files
-  # POST /data_files.json
   def create
-    @data_file = DataFile.new()
+    @data_file = DataFile.new(params[:data_file])
 
-    unless params[:data_file]
-      @data_file.errors[:base] << "Pick a data file."
-    else
-      uploaded_io = params[:data_file][:data]
-
+    if @data_file.valid?
+      uploaded_io = params[:data_file][:data_file]
       @data_file.process(uploaded_io.tempfile)
-
     end
 
     respond_to do |format|

@@ -23,7 +23,7 @@ describe DataFilesController do
   # This should return the minimal set of attributes required to create a valid
   # DataFile. As you add validations to DataFile, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "file_name" => "MyString" } }
+  let(:valid_attributes) { { "data_file" => "some file" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
