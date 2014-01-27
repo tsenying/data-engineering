@@ -4,5 +4,5 @@
 - cd data-engineering/
 - rbenv local 2.1.0 if using rbenv
 - bundle install
-- bin/rake db:migrate
+- rake db:migrate
 - rails s

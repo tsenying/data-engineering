@@ -5,9 +5,7 @@ class DataFile < ActiveRecord::Base
 
     self.total = 0
     data_file.each do |line|
-      logger.info("line:#{line}")
       fields = line.split(/\t/);
-      logger.info("fields:#{fields.inspect}")
       self.total += fields[2].to_f * fields[3].to_i
 
       purchase = Purchase.new(:count => fields[3])
@@ -18,6 +16,5 @@ class DataFile < ActiveRecord::Base
       purchase.save
     end
 
-    logger.info("\n\n!!!!!!!!total=#{total}, self.total=#{self.total}")
   end
 end
